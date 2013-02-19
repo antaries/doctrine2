@@ -684,6 +684,9 @@ class ClassMetadataInfo implements ClassMetadata
 
             foreach ($this->identifier as $idField) {
                 $value = $this->reflFields[$idField]->getValue($entity);
+                if (is_object($value)) {
+                    $value = spl_object_hash($value);
+                }
 
                 if ($value !== null) {
                     $id[$idField] = $value;
